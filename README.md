@@ -1,4 +1,4 @@
-# Installation
+### Installation
 
 cloning project
 ```
@@ -35,14 +35,22 @@ run server
 php artisan serve
 ```
 
+### Credential 
+credential dapat diambil melalui dashboard seuaikan pada .env terdiri dari 
+```
+BOARDING_SCHOOL_BASE=""
+BOARDING_SCHOOL_KEY= "" 
+BOARDING_SCHOOL_SECRET="" 
+BOARDING_SCHOOL_CODE="" 
+```
 
-# Untuk test api sudah diberikan contoh pada file route
+
+### Untuk test api sudah diberikan contoh pada file route
 
 contoh get profile
 ```
 /example/profile
 ```
-
 
 contoh get album
 ```
