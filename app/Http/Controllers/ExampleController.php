@@ -23,4 +23,10 @@ class ExampleController extends Controller
         $album = app('App\Helpers\BoardingSchool')->albumShow($uuid);
         return $album;
     }
+
+    public function employee()
+    {
+        $employee = app('App\Helpers\BoardingSchool')->employee();
+        return $employee;
+    }
 }

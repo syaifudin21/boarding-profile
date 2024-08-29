@@ -3,8 +3,6 @@
 namespace App\Helpers;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 
 class BoardingSchool extends Model
@@ -39,7 +37,7 @@ class BoardingSchool extends Model
         ];
     }
 
-    public function send($method, $endpoint, $body)
+    public function send($method, $endpoint, $body, $attach = [])
     {
         $head = $this->signature($body, $method);
         $header = [
@@ -49,7 +47,23 @@ class BoardingSchool extends Model
             'X-CODE' => $this->code,
         ];
 
-        return Http::withHeaders($header)->$method($this->base . $endpoint, $body)->object();
+        $response = Http::withHeaders($header);
+
+        if ($attach) {
+            try {
+                $filenamewithextension = $attach['photo']->getClientOriginalName();
+                $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
+                $response = $response->attach($attach['param'], file_get_contents($attach['photo']), $filename, ['Content-Type' => $attach['contentType']]);
+            } catch (\Exception $e) {
+                return $e->getMessage();
+            }
+        }
+
+        try {
+            return $response->$method($this->base . $endpoint, $body)->object();
+        } catch (\Exception $e) {
+            return $e->getMessage();
+        }
     }
 
     public function profile()
@@ -89,6 +103,58 @@ class BoardingSchool extends Model
         $endpoint = '/api/album/' . $uuid;
 
         $response = $this->send('get', $endpoint, $body);
+        return $response;
+    }
+
+    public function alumni()
+    {
+        $body = [];
+        $endpoint = '/api/alumni';
+
+        $response = $this->send('get', $endpoint, $body);
+        return $response;
+    }
+
+    public function employee()
+    {
+        $body = [];
+        $endpoint = '/api/employee';
+
+        $response = $this->send('get', $endpoint, $body);
+        return $response;
+    }
+
+    public function alumniStore($name, $position, $description, $photo)
+    {
+        $body = [
+            'name' => $name,
+            'position' => $position,
+            'description' => $description,
+        ];
+
+        $endpoint = '/api/alumni';
+
+        $attach = [
+            'photo' => $photo,
+            'param' => 'photo',
+            'contentType' => 'image/jpeg'
+        ];
+
+        $response = $this->send('post', $endpoint, $body, $attach);
+        return $response;
+    }
+
+    public function inboxStore($name, $email, $message)
+    {
+        $body = [
+            'name' => $name,
+            'email' => $email,
+            'message' => $message,
+        ];
+
+        $endpoint = '/api/inbox';
+
+        $response = $this->send('post', $endpoint, $body);
         return $response;
     }
 }
