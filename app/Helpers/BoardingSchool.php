@@ -124,6 +124,15 @@ class BoardingSchool extends Model
         return $response;
     }
 
+    public function banner()
+    {
+        $body = [];
+        $endpoint = '/api/banner';
+
+        $response = $this->send('get', $endpoint, $body);
+        return $response;
+    }
+
     public function alumniStore($name, $position, $description, $photo)
     {
         $body = [

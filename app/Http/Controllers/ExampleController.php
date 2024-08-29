@@ -29,4 +29,10 @@ class ExampleController extends Controller
         $employee = app('App\Helpers\BoardingSchool')->employee();
         return $employee;
     }
+
+    public function banner(Request $request)
+    {
+        $banner = app('App\Helpers\BoardingSchool')->banner($request);
+        return $banner;
+    }
 }
