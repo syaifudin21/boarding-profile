@@ -35,4 +35,11 @@ class ExampleController extends Controller
         $banner = app('App\Helpers\BoardingSchool')->banner($request);
         return $banner;
     }
+
+
+    public function alumni(Request $request)
+    {
+        $alumni = app('App\Helpers\BoardingSchool')->alumni($request);
+        return $alumni;
+    }
 }
