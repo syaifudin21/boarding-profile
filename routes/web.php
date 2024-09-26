@@ -2,12 +2,19 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ExampleController;
+use App\Http\Controllers\LandingPage\HomeController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/album', [HomeController::class, 'album'])->name('album');
+Route::get('/album/{uuid}', [HomeController::class, 'albumShow'])->name('album.show');
+
+Route::get('/blog', [HomeController::class, 'blog'])->name('blog');
+Route::get('/blog/{uuid}', [HomeController::class, 'blogShow'])->name('blog.show');
+
+Route::get('clear', [HomeController::class, 'clear']);
 
 Route::prefix('example')->controller(ExampleController::class)->group(function () {
+    Route::get('/', 'index');
     Route::get('/profile', 'profile');
     Route::get('/album', 'album');
     Route::get('/album/{uuid}', 'albumShow');

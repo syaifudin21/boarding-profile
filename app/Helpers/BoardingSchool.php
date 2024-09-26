@@ -88,9 +88,13 @@ class BoardingSchool extends Model
         return $response;
     }
 
-    public function album()
+    public function album($limit = null, $orderByType = null)
     {
-        $body = [];
+        $body = [
+            'limit' => $limit,
+            'order_by' => $orderByType
+        ];
+
         $endpoint = '/api/album';
 
         $response = $this->send('get', $endpoint, $body);
@@ -115,11 +119,9 @@ class BoardingSchool extends Model
         return $response;
     }
 
-    public function employee()
+    public function employee($body = [])
     {
-        $body = [];
         $endpoint = '/api/employee';
-
         $response = $this->send('get', $endpoint, $body);
         return $response;
     }

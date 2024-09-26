@@ -6,6 +6,11 @@ use Illuminate\Http\Request;
 
 class ExampleController extends Controller
 {
+    public function index()
+    {
+        return view('example.index');
+    }
+
     public function profile()
     {
         $profile = app('App\Helpers\BoardingSchool')->profile();
