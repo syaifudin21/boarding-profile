@@ -15,6 +15,9 @@ Route::get('/facility', [HomeController::class, 'facility'])->name('facility');
 Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
 Route::post('/message', [HomeController::class, 'messageStore'])->name('message.store');
 
+Route::get('/alumni', [HomeController::class, 'alumni'])->name('alumni');
+Route::post('/alumni', [HomeController::class, 'alumniStore'])->name('alumni.store');
+
 Route::get('clear', [HomeController::class, 'clear']);
 
 Route::prefix('example')->controller(ExampleController::class)->group(function () {

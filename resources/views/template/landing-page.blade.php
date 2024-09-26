@@ -191,8 +191,8 @@
                     <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="{{ route('blog') }}">Blog</a>
                     <a class="me-3 py-2 link-body-emphasis text-decoration-none"
                         href="{{ route('facility') }}">Fasilitas</a>
-                    <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="#">Alumni</a>
-                    <a class="py-2 link-body-emphasis text-decoration-none" href="{{ route('contact') }}">Kontak</a>
+                    {{-- <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="#">Alumni</a> --}}
+                    <a class="py-2 link-body-emphasis text-decoration-none" href="{{ route('contact') }}">Contact</a>
                 </nav>
             </div>
 
@@ -204,57 +204,8 @@
 
         </main>
 
-        <footer class="pt-4 my-md-5 pt-md-5 border-top">
-            <div class="row">
-                <div class="col-12 col-md text-center">
-                    <img class="mb-2" src="{{ $profile->logo }}" alt="{{ $profile->name }}" width="44">
-                    <small class="d-block mb-3 text-body-secondary">&copy; 2017–2024</small>
-                </div>
-                <div class="col-6 col-md">
-                    <h5>Features</h5>
-                    <ul class="list-unstyled text-small">
-                        <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Cool
-                                stuff</a></li>
-                        <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Random
-                                feature</a></li>
-                        <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Team
-                                feature</a></li>
-                        <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Stuff for
-                                developers</a></li>
-                        <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Another
-                                one</a></li>
-                        <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Last
-                                time</a></li>
-                    </ul>
-                </div>
-                <div class="col-6 col-md">
-                    <h5>Resources</h5>
-                    <ul class="list-unstyled text-small">
-                        <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Resource</a>
-                        </li>
-                        <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Resource
-                                name</a></li>
-                        <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Another
-                                resource</a></li>
-                        <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Final
-                                resource</a></li>
-                    </ul>
-                </div>
-                <div class="col-6 col-md">
-                    <h5>About</h5>
-                    <ul class="list-unstyled text-small">
-                        <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Team</a>
-                        </li>
-                        <li class="mb-1"><a class="link-secondary text-decoration-none"
-                                href="#">Locations</a></li>
-                        <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Privacy</a>
-                        </li>
-                        <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Terms</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </footer>
+        @yield('footer')
+
     </div>
     <script src="{{ asset('vendor/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
     @yield('script')

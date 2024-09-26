@@ -66,6 +66,27 @@ class HomeController extends Controller
         return view('landing-page.contact', compact('profile', 'title'));
     }
 
+    public function alumni()
+    {
+        $profile = $this->getProfile();
+        $title = 'Alumni';
+
+        return view('landing-page.alumni', compact('profile', 'title'));
+    }
+
+    public function alumniStore(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+            'position' => 'required',
+            'description' => 'required',
+            'photo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+
+        $alumni = app('App\Helpers\BoardingSchool')->alumniStore($request->name, $request->position, $request->description, $request->photo);
+        return redirect()->back()->with('success', 'Alumni sent successfully');
+    }
+
     public function messageStore(Request $request)
     {
         $request->validate([
