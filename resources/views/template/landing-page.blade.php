@@ -189,9 +189,10 @@
 
                 <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
                     <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="{{ route('blog') }}">Blog</a>
-                    <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="#">Fasilitas</a>
+                    <a class="me-3 py-2 link-body-emphasis text-decoration-none"
+                        href="{{ route('facility') }}">Fasilitas</a>
                     <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="#">Alumni</a>
-                    <a class="py-2 link-body-emphasis text-decoration-none" href="#">Kontak</a>
+                    <a class="py-2 link-body-emphasis text-decoration-none" href="{{ route('contact') }}">Kontak</a>
                 </nav>
             </div>
 

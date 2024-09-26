@@ -58,6 +58,26 @@ class HomeController extends Controller
         return view('landing-page.blog-show', compact('profile', 'title', 'blog'));
     }
 
+    public function contact()
+    {
+        $profile = $this->getProfile();
+        $title = 'Contact';
+
+        return view('landing-page.contact', compact('profile', 'title'));
+    }
+
+    public function messageStore(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|email',
+            'message' => 'required',
+        ]);
+
+        $message = app('App\Helpers\BoardingSchool')->inboxStore($request->name, $request->email, $request->message);
+        return redirect()->back()->with('success', 'Message sent successfully');
+    }
+
     public function getBlog()
     {
         $blog = Cache::remember('boarding-school-blog', now()->addHours(24), function () {
@@ -73,6 +93,23 @@ class HomeController extends Controller
         });
 
         return $blog->data;
+    }
+
+    public function facility()
+    {
+        $profile = $this->getProfile();
+        $title = 'Fasilitas';
+        $facility = $this->getFacility();
+
+        return view('landing-page.facility', compact('profile', 'title', 'facility'));
+    }
+
+    public function getFacility()
+    {
+        $facility = Cache::remember('boarding-school-facility', now()->addHours(24), function () {
+            return app('App\Helpers\BoardingSchool')->facility();
+        });
+        return $facility->data;
     }
 
     public function getBanner()

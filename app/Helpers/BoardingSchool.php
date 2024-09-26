@@ -133,6 +133,15 @@ class BoardingSchool extends Model
         return $response;
     }
 
+    public function facility()
+    {
+        $body = [];
+        $endpoint = '/api/facility';
+
+        $response = $this->send('get', $endpoint, $body);
+        return $response;
+    }
+
     public function alumni()
     {
         $body = [];

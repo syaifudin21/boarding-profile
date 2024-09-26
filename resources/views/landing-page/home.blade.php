@@ -77,20 +77,18 @@
 
     <hr>
     <section class="mb-5 pt-3">
-        <div class="row">
-            <div class="row row-cols-1 row-cols-md-3 mb-3">
-                @foreach ($almbums as $item)
-                    <div class="col">
-                        <a href="{{ route('album.show', $item->uuid) }}" class="text-decoration-none"
-                            style="text-decoration: none; color: inherit;">
-                            <img src="{{ $item->photo }}" alt="{{ $item->album }}" width="100%"
-                                style="height: 200px; object-fit: cover; margin-bottom: 10px">
-                            <span class="fw-bold">{{ $item->album }}</span>
-                            <p class="">{{ $item->description }}</p>
-                        </a>
-                    </div>
-                @endforeach
-            </div>
+        <div class="row row-cols-1 row-cols-md-3 mb-3">
+            @foreach ($almbums as $item)
+                <div class="col">
+                    <a href="{{ route('album.show', $item->uuid) }}" class="text-decoration-none"
+                        style="text-decoration: none; color: inherit;">
+                        <img src="{{ $item->photo }}" alt="{{ $item->album }}" width="100%"
+                            style="height: 200px; object-fit: cover; margin-bottom: 10px">
+                        <span class="fw-bold">{{ $item->album }}</span>
+                        <p class="">{{ $item->description }}</p>
+                    </a>
+                </div>
+            @endforeach
         </div>
     </section>
 @endsection

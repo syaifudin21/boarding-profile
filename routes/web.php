@@ -11,6 +11,10 @@ Route::get('/album/{uuid}', [HomeController::class, 'albumShow'])->name('album.s
 Route::get('/blog', [HomeController::class, 'blog'])->name('blog');
 Route::get('/blog/{slug}/{uuid}', [HomeController::class, 'blogShow'])->name('blog.show');
 
+Route::get('/facility', [HomeController::class, 'facility'])->name('facility');
+Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
+Route::post('/message', [HomeController::class, 'messageStore'])->name('message.store');
+
 Route::get('clear', [HomeController::class, 'clear']);
 
 Route::prefix('example')->controller(ExampleController::class)->group(function () {
