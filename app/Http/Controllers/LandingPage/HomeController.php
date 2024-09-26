@@ -37,6 +37,44 @@ class HomeController extends Controller
         return $profile->data;
     }
 
+    public function blog()
+    {
+        $profile = $this->getProfile();
+        $title = 'Blog';
+
+        $blog = $this->getBlog();
+
+        return view('landing-page.blog', compact('profile', 'title', 'blog'));
+    }
+
+    public function blogShow($slug, $uuid)
+    {
+        $profile = $this->getProfile();
+        $title = 'Blog';
+
+        $blog = $this->getBlogShow($uuid);
+
+
+        return view('landing-page.blog-show', compact('profile', 'title', 'blog'));
+    }
+
+    public function getBlog()
+    {
+        $blog = Cache::remember('boarding-school-blog', now()->addHours(24), function () {
+            return app('App\Helpers\BoardingSchool')->blog();
+        });
+        return $blog->data;
+    }
+
+    public function getBlogShow($uuid)
+    {
+        $blog = Cache::remember('boarding-school-blog-show', now()->addHours(24), function () use ($uuid) {
+            return app('App\Helpers\BoardingSchool')->blogShow($uuid);
+        });
+
+        return $blog->data;
+    }
+
     public function getBanner()
     {
         $banner = Cache::remember('boarding-school-banner2', now()->addHours(24), function () {

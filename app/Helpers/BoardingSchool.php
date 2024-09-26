@@ -110,6 +110,29 @@ class BoardingSchool extends Model
         return $response;
     }
 
+
+    public function blog($limit = null, $orderByType = null)
+    {
+        $body = [
+            'limit' => $limit,
+            'order_by' => $orderByType
+        ];
+
+        $endpoint = '/api/blog';
+
+        $response = $this->send('get', $endpoint, $body);
+        return $response;
+    }
+
+    public function blogShow($uuid)
+    {
+        $body = [];
+        $endpoint = '/api/blog/' . $uuid;
+
+        $response = $this->send('get', $endpoint, $body);
+        return $response;
+    }
+
     public function alumni()
     {
         $body = [];

@@ -9,7 +9,7 @@ Route::get('/album', [HomeController::class, 'album'])->name('album');
 Route::get('/album/{uuid}', [HomeController::class, 'albumShow'])->name('album.show');
 
 Route::get('/blog', [HomeController::class, 'blog'])->name('blog');
-Route::get('/blog/{uuid}', [HomeController::class, 'blogShow'])->name('blog.show');
+Route::get('/blog/{slug}/{uuid}', [HomeController::class, 'blogShow'])->name('blog.show');
 
 Route::get('clear', [HomeController::class, 'clear']);
 
