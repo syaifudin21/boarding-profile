@@ -14,13 +14,17 @@
         <div class="row row-cols-1 row-cols-md-3 mb-3">
             @foreach ($facility as $item)
                 <div class="col">
-                    <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"
-                        data-bs-image="{{ $item->image }}" style="text-decoration: none; color: inherit;">
-                        <img src="{{ $item->image }}" alt="{{ $item->name }}" width="100%"
-                            style="height: 200px; object-fit: cover; margin-bottom: 10px">
-                        <span class="fw-bold">{{ $item->name }}</span>
-                        <p class="">{{ $item->description }}</p>
-                    </a>
+                    <div class="card">
+                        <div class="card-body">
+                            <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                                data-bs-image="{{ $item->image }}" style="text-decoration: none; color: inherit;">
+                                <img src="{{ $item->image }}" alt="{{ $item->name }}" width="100%"
+                                    style="height: 200px; object-fit: cover; margin-bottom: 10px">
+                                <span class="fw-bold">{{ $item->name }}</span>
+                                <p class="">{{ $item->description }}</p>
+                            </a>
+                        </div>
+                    </div>
                 </div>
             @endforeach
 

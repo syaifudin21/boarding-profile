@@ -105,6 +105,15 @@ class HomeController extends Controller
         return view('landing-page.facility', compact('profile', 'title', 'facility'));
     }
 
+    public function employee()
+    {
+        $profile = app('App\Helpers\BoardingSchool')->profile();
+        $title = 'Pengurus';
+        $employee = app('App\Helpers\BoardingSchool')->employee();
+
+        return view('landing-page.employee', compact('profile', 'title', 'employee'));
+    }
+
     public function clear()
     {
         Cache::clear();

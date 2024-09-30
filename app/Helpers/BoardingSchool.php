@@ -67,7 +67,9 @@ class BoardingSchool extends Model
                 return $e->getMessage();
             }
         } else {
-            $send = Cache::remember($endpoint, 60 * 60 * 24, function () use ($method, $endpoint, $body, $response) {
+
+            $expired = env('BOARDING_SCHOOL_CACHE_EXPIRED', 60 * 60 * 24);
+            $send = Cache::remember($endpoint, $expired, function () use ($method, $endpoint, $body, $response) {
                 try {
                     return $response->$method($this->base . $endpoint, $body)->object();
                 } catch (\Exception $e) {

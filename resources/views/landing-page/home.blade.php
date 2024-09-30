@@ -50,7 +50,7 @@
 
     <section class="mb-5">
         <div class="row">
-            @foreach ($employee->data as $item)
+            @foreach ($employee as $item)
                 <div class="col-sm-4">
                     <div class="card">
                         <img src="{{ $item->photo }}" class="card-img-top" alt="..."
@@ -67,16 +67,25 @@
     </section>
 
     <section class="mb-5">
-        <h3 class="fw-normal text-body-emphasis">Visi</h3>
-        {!! $profile->vision !!}
+        <div class="card bg-warning">
+            <div class="card-body">
+                <h3 class="fw-normal text-body-emphasis">Visi</h3>
+                {!! $profile->vision !!}
+            </div>
+        </div>
     </section>
     <section class="mb-5">
-        <h3 class="fw-normal text-body-emphasis">Misi</h3>
-        {!! $profile->mission !!}
+        <div class="card bg-success text-white">
+            <div class="card-body">
+                <h3 class="fw-normal text-white">Misi</h3>
+                {!! $profile->mission !!}
+            </div>
+        </div>
     </section>
 
     <hr>
     <section class="mb-5 pt-3">
+        <h3 class="fw-normal text-body-emphasis mb-4">Gallery</h3>
         <div class="row row-cols-1 row-cols-md-3 mb-3">
             @foreach ($almbums as $item)
                 <div class="col">
