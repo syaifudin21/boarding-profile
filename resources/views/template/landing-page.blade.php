@@ -191,7 +191,8 @@
                     <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="{{ route('blog') }}">Blog</a>
                     <a class="me-3 py-2 link-body-emphasis text-decoration-none"
                         href="{{ route('facility') }}">Fasilitas</a>
-                    {{-- <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="#">Alumni</a> --}}
+                    <a class="me-3 py-2 link-body-emphasis text-decoration-none"
+                        href="{{ route('alumni') }}">Alumni</a>
                     <a class="py-2 link-body-emphasis text-decoration-none" href="{{ route('contact') }}">Contact</a>
                 </nav>
             </div>

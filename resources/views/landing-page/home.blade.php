@@ -50,7 +50,7 @@
 
     <section class="mb-5">
         <div class="row">
-            @foreach ($employee as $item)
+            @foreach ($employee->data as $item)
                 <div class="col-sm-4">
                     <div class="card">
                         <img src="{{ $item->photo }}" class="card-img-top" alt="..."

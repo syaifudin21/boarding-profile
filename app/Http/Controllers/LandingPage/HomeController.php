@@ -10,12 +10,12 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $profile = $this->getProfile();
-        $banner = $this->getBanner();
+        $profile = app('App\Helpers\BoardingSchool')->profile();
+        $banner = app('App\Helpers\BoardingSchool')->banner();
         $position = ['position' => 'Pengasuh,Kepala Madrasah,Kepala Pondok'];
-        $employee = $this->getEmployee($position);
+        $employee = app('App\Helpers\BoardingSchool')->employee($position);
 
-        $almbums = $this->getAlbum(3, 'id');
+        $almbums = app('App\Helpers\BoardingSchool')->album(3, 'id');
         $title = 'Beranda';
 
         return view('landing-page.home', compact('profile', 'banner', 'employee', 'almbums', 'title'));
@@ -23,36 +23,29 @@ class HomeController extends Controller
 
     public function albumShow($uuid)
     {
-        $profile = $this->getProfile();
+        $profile = app('App\Helpers\BoardingSchool')->profile();
 
-        $album = $this->getAlbumShow($uuid);
+        $album = app('App\Helpers\BoardingSchool')->albumShow($uuid);
         $title = 'Album';
         return view('landing-page.album-show', compact('profile', 'album', 'title'));
-    }
-    public function getProfile()
-    {
-        $profile = Cache::remember('boarding-school-profile2', now()->addHours(24), function () {
-            return app('App\Helpers\BoardingSchool')->profile();
-        });
-        return $profile->data;
     }
 
     public function blog()
     {
-        $profile = $this->getProfile();
+        $profile = app('App\Helpers\BoardingSchool')->profile();
         $title = 'Blog';
 
-        $blog = $this->getBlog();
+        $blog = app('App\Helpers\BoardingSchool')->blog();
 
         return view('landing-page.blog', compact('profile', 'title', 'blog'));
     }
 
     public function blogShow($slug, $uuid)
     {
-        $profile = $this->getProfile();
+        $profile = app('App\Helpers\BoardingSchool')->profile();
         $title = 'Blog';
 
-        $blog = $this->getBlogShow($uuid);
+        $blog = app('App\Helpers\BoardingSchool')->blogShow($uuid);
 
 
         return view('landing-page.blog-show', compact('profile', 'title', 'blog'));
@@ -60,7 +53,7 @@ class HomeController extends Controller
 
     public function contact()
     {
-        $profile = $this->getProfile();
+        $profile = app('App\Helpers\BoardingSchool')->profile();
         $title = 'Contact';
 
         return view('landing-page.contact', compact('profile', 'title'));
@@ -68,7 +61,7 @@ class HomeController extends Controller
 
     public function alumni()
     {
-        $profile = $this->getProfile();
+        $profile = app('App\Helpers\BoardingSchool')->profile();
         $title = 'Alumni';
 
         return view('landing-page.alumni', compact('profile', 'title'));
@@ -84,7 +77,11 @@ class HomeController extends Controller
         ]);
 
         $alumni = app('App\Helpers\BoardingSchool')->alumniStore($request->name, $request->position, $request->description, $request->photo);
-        return redirect()->back()->with('success', 'Alumni sent successfully');
+        if ($alumni) {
+            return redirect()->back()->with('success', $alumni->message);
+        } else {
+            return redirect()->back()->with('error', $alumni->message);
+        }
     }
 
     public function messageStore(Request $request)
@@ -99,66 +96,13 @@ class HomeController extends Controller
         return redirect()->back()->with('success', 'Message sent successfully');
     }
 
-    public function getBlog()
-    {
-        $blog = Cache::remember('boarding-school-blog', now()->addHours(24), function () {
-            return app('App\Helpers\BoardingSchool')->blog();
-        });
-        return $blog->data;
-    }
-
-    public function getBlogShow($uuid)
-    {
-        $blog = Cache::remember('boarding-school-blog-show', now()->addHours(24), function () use ($uuid) {
-            return app('App\Helpers\BoardingSchool')->blogShow($uuid);
-        });
-
-        return $blog->data;
-    }
-
     public function facility()
     {
-        $profile = $this->getProfile();
+        $profile = app('App\Helpers\BoardingSchool')->profile();
         $title = 'Fasilitas';
-        $facility = $this->getFacility();
+        $facility = app('App\Helpers\BoardingSchool')->facility();
 
         return view('landing-page.facility', compact('profile', 'title', 'facility'));
-    }
-
-    public function getFacility()
-    {
-        $facility = Cache::remember('boarding-school-facility', now()->addHours(24), function () {
-            return app('App\Helpers\BoardingSchool')->facility();
-        });
-        return $facility->data;
-    }
-
-    public function getBanner()
-    {
-        $banner = Cache::remember('boarding-school-banner2', now()->addHours(24), function () {
-            return app('App\Helpers\BoardingSchool')->banner();
-        });
-        return $banner->data;
-    }
-
-    public function getAlbumShow($uuid)
-    {
-        $album = Cache::remember('boarding-school-album-show', now()->addHours(24), function () use ($uuid) {
-            return app('App\Helpers\BoardingSchool')->albumShow($uuid);
-        });
-        return $album->data;
-    }
-
-    public function getEmployee($position = [])
-    {
-        $employee =  app('App\Helpers\BoardingSchool')->employee($position);
-        return $employee->data;
-    }
-
-    public function getAlbum($limit, $orderByType)
-    {
-        $album =  app('App\Helpers\BoardingSchool')->album($limit, $orderByType);
-        return $album->data;
     }
 
     public function clear()

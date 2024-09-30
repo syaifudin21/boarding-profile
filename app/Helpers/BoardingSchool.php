@@ -3,6 +3,7 @@
 namespace App\Helpers;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
 
 class BoardingSchool extends Model
@@ -59,10 +60,26 @@ class BoardingSchool extends Model
             }
         }
 
-        try {
-            return $response->$method($this->base . $endpoint, $body)->object();
-        } catch (\Exception $e) {
-            return $e->getMessage();
+        if (in_array($method, ['POST', 'PUT', 'DELETE', 'post', 'put', 'delete'])) {
+            try {
+                return $response->$method($this->base . $endpoint, $body)->object();
+            } catch (\Exception $e) {
+                return $e->getMessage();
+            }
+        } else {
+            $send = Cache::remember($endpoint, 60 * 60 * 24, function () use ($method, $endpoint, $body, $response) {
+                try {
+                    return $response->$method($this->base . $endpoint, $body)->object();
+                } catch (\Exception $e) {
+                    return $e->getMessage();
+                }
+            });
+
+            if ($send->data) {
+                return $send->data;
+            } else {
+                return $send;
+            }
         }
     }
 
