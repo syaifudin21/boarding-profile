@@ -15,10 +15,10 @@ class HomeController extends Controller
         $position = ['position' => 'Pengasuh,Kepala Madrasah,Kepala Pondok'];
         $employee = app('App\Helpers\BoardingSchool')->employee($position);
 
-        $almbums = app('App\Helpers\BoardingSchool')->album(3, 'id');
+        $albums = app('App\Helpers\BoardingSchool')->album(3, 'id');
         $title = 'Beranda';
 
-        return view('landing-page.home', compact('profile', 'banner', 'employee', 'almbums', 'title'));
+        return view('landing-page.home', compact('profile', 'banner', 'employee', 'albums', 'title'));
     }
 
     public function albumShow($uuid)

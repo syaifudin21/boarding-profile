@@ -87,7 +87,7 @@
     <section class="mb-5 pt-3">
         <h3 class="fw-normal text-body-emphasis mb-4">Gallery</h3>
         <div class="row row-cols-1 row-cols-md-3 mb-3">
-            @foreach ($almbums as $item)
+            @foreach ($albums as $item)
                 <div class="col">
                     <a href="{{ route('album.show', $item->uuid) }}" class="text-decoration-none"
                         style="text-decoration: none; color: inherit;">

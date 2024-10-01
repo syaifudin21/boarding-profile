@@ -77,7 +77,7 @@ class BoardingSchool extends Model
                 }
             });
 
-            if ($send->data) {
+            if (isset($send->data)) {
                 return $send->data;
             } else {
                 return $send;
